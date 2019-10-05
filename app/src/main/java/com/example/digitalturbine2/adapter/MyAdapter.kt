@@ -10,7 +10,7 @@ import com.example.digitalturbine2.R
 import com.example.digitalturbine2.model.Campaign
 import com.squareup.picasso.Picasso
 
-class MyAdapter(val campaignListener :CampaignListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MyAdapter(private val campaignListener :CampaignListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 private var campaignList: List<Campaign> = ArrayList()
 

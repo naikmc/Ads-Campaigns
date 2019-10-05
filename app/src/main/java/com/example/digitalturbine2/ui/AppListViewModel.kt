@@ -14,6 +14,7 @@ class AppListViewModel : ViewModel() {
 
     private val campaignListLive: MutableLiveData<List<Campaign>> = MutableLiveData()
     private val campaignLive: MutableLiveData<Campaign> = MutableLiveData()
+    private val noDataLiveData : MutableLiveData<Boolean> = MutableLiveData()
 
     init {
         getData()
@@ -38,8 +39,18 @@ class AppListViewModel : ViewModel() {
         })
     }
 
-    fun setSelectedCampaign(campaign: Campaign) {
-        campaignLive.value = campaign
+    fun setSelectedCampaign(campaign: Campaign?) {
+        if(campaign != null) {
+            campaignLive.value = campaign
+            noDataLiveData.value = false;
+        } else{
+            noDataLiveData.value = true
+        }
+
+    }
+
+    fun getNoDataLiveData(): LiveData<Boolean>{
+        return noDataLiveData
     }
 
     fun getSelectedCampaign(): LiveData<Campaign> {
