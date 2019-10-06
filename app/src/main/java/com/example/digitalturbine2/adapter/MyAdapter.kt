@@ -19,16 +19,16 @@ private var campaignList: List<Campaign> = ArrayList()
     }
 
     override fun getItemCount(): Int {
-        return campaignList?.size!!
+        return campaignList.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        campaignList?.get(position)?.let { ( holder as MyViewHolder).bind(it) }
+        campaignList.get(position).let { ( holder as MyViewHolder).bind(it) }
 
     }
 
 
-    class MyViewHolder(val view: View, private val campaignListener :CampaignListener) : RecyclerView.ViewHolder(view) , View.OnClickListener{
+    class MyViewHolder(view: View, private val campaignListener :CampaignListener) : RecyclerView.ViewHolder(view) , View.OnClickListener{
         init {
             view.setOnClickListener(this)
         }
@@ -62,8 +62,8 @@ private var campaignList: List<Campaign> = ArrayList()
     }
 
     fun getCampaign(position: Int): Campaign? {
-        if (campaignList != null && campaignList!!.size > 0) {
-            return campaignList!![position]
+        if (campaignList.isNotEmpty()) {
+            return campaignList[position]
         }
         return null
 

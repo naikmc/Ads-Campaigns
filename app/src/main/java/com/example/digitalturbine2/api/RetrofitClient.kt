@@ -6,8 +6,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-  //  private val AUTH = "Basic "+ Base64.encodeToString("belalkhan:123456".toByteArray(), Base64.NO_WRAP)
-
     private const val BASE_URL = "https://ads.appia.com/"
 
     private val okHttpClient = OkHttpClient.Builder()

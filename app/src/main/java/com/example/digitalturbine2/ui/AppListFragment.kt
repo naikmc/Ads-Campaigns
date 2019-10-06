@@ -51,9 +51,7 @@ class AppListFragment : Fragment(), CampaignListener {
 
     override fun onCampaignClick(position: Int) {
         myAdapter.getCampaign(position).let {
-
             viewModel.setSelectedCampaign(it)
-
         }
         fragmentManager?.beginTransaction()?.replace(R.id.frame_layout, AppDetailsFragment.newInstance())?.addToBackStack(null)?.commit()
     }
