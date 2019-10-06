@@ -1,5 +1,6 @@
 package com.example.digitalturbine2.ui
 
+import android.content.res.Configuration
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -40,7 +41,12 @@ class AppListFragment : Fragment(), CampaignListener {
         }!!
         myAdapter  = MyAdapter( this@AppListFragment)
         recycler_view.apply {
-            layoutManager = GridLayoutManager(this@AppListFragment.context,2)
+
+            var spanCount = 2
+            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                spanCount = 3
+            }
+            layoutManager = GridLayoutManager(this@AppListFragment.context, spanCount)
             adapter = myAdapter
         }
 
