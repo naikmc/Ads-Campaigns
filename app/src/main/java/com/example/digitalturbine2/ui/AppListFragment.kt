@@ -35,7 +35,7 @@ class AppListFragment : Fragment(), CampaignListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+    //    viewModel =  ViewModelProviders.of(this).get(AppListViewModel::class.java)
         viewModel = activity?.run {
             ViewModelProviders.of(this).get(AppListViewModel::class.java)
         }!!
@@ -51,7 +51,14 @@ class AppListFragment : Fragment(), CampaignListener {
         }
 
         viewModel.getCampaignListLiveData().observe(viewLifecycleOwner, Observer {
-            myAdapter.setCampaignList(it)
+            if(it != null) {
+                error_layout.visibility = View.GONE
+                recycler_view.visibility = View.VISIBLE
+                myAdapter.setCampaignList(it)
+            } else{
+                error_layout.visibility = View.VISIBLE
+                recycler_view.visibility = View.GONE
+            }
         })
     }
 
@@ -59,7 +66,7 @@ class AppListFragment : Fragment(), CampaignListener {
         myAdapter.getCampaign(position).let {
             viewModel.setSelectedCampaign(it)
         }
-        fragmentManager?.beginTransaction()?.replace(R.id.frame_layout, AppDetailsFragment.newInstance())?.addToBackStack(null)?.commit()
+        fragmentManager?.beginTransaction()?.add(R.id.frame_layout, AppDetailsFragment.newInstance())?.addToBackStack(null)?.commit()
     }
 
 }

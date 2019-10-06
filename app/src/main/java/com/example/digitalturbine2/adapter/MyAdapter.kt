@@ -15,7 +15,7 @@ class MyAdapter(private val campaignListener :CampaignListener) : RecyclerView.A
 private var campaignList: List<Campaign> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.campaign_item,parent, false),campaignListener )
+        return CampaignViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.campaign_item,parent, false),campaignListener )
     }
 
     override fun getItemCount(): Int {
@@ -23,12 +23,12 @@ private var campaignList: List<Campaign> = ArrayList()
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        campaignList.get(position).let { ( holder as MyViewHolder).bind(it) }
+        campaignList.get(position).let { ( holder as CampaignViewHolder).bind(it) }
 
     }
 
 
-    class MyViewHolder(view: View, private val campaignListener :CampaignListener) : RecyclerView.ViewHolder(view) , View.OnClickListener{
+    class CampaignViewHolder(view: View, private val campaignListener :CampaignListener) : RecyclerView.ViewHolder(view) , View.OnClickListener{
         init {
             view.setOnClickListener(this)
         }
@@ -48,7 +48,7 @@ private var campaignList: List<Campaign> = ArrayList()
             title.text = campaign.productName
             ratingText.text = campaign.rating.toString()
             Picasso.get()
-                .load(campaign.averageRatingImageURL?.replace("https","http"))
+                .load(campaign.averageRatingImageURL?.replace("https","http")) // for some reason https was not working
                 .into(ratingImage)
             Picasso.get()
                 .load(campaign.productThumbnail)

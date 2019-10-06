@@ -9,11 +9,16 @@ import com.example.digitalturbine2.repo.Repository
 class AppListViewModel : ViewModel() {
 
     private val campaignLive: MutableLiveData<Campaign> = MutableLiveData()
+    private var campaignListLive: LiveData<List<Campaign>>
     private val noDataLiveData : MutableLiveData<Boolean> = MutableLiveData()
 
+    init {
+            campaignListLive = Repository.getData()
+
+    }
 
     fun getCampaignListLiveData(): LiveData<List<Campaign>> {
-        return Repository.getData()
+        return campaignListLive
     }
 
     fun setSelectedCampaign(campaign: Campaign?) {

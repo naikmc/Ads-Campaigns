@@ -10,41 +10,28 @@ import retrofit2.Response
 
 object Repository {
 
-    fun getData(): LiveData<List<Campaign>>{
-
-        return object: LiveData<List<Campaign>>(){
+    fun getData(): LiveData<List<Campaign>> {
+        return object : LiveData<List<Campaign>>() {
             override fun onActive() {
                 super.onActive()
-                RetrofitClient.instance.getDetails().enqueue(object : Callback<DefaultResponse> {
-                    override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-                    }
+                if (value == null || value?.isEmpty()!!) {
+                    RetrofitClient.instance.getDetails()
+                        .enqueue(object : Callback<DefaultResponse> {
+                            override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                                value = null
+                            }
 
-                    override fun onResponse(
-                        call: Call<DefaultResponse>,
-                        response: Response<DefaultResponse>
-                    ) {
-                        value = response.body()?.campaigns as List<Campaign>?
-                    }
-                })
+                            override fun onResponse(
+                                call: Call<DefaultResponse>,
+                                response: Response<DefaultResponse>
+                            ) {
+                                value = response.body()?.campaigns as List<Campaign>?
+                            }
+                        })
 
+                }
             }
         }
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
