@@ -13,7 +13,7 @@ object RetrofitClient {
                 val original = chain.request()
 
                 val requestBuilder = original.newBuilder()
-                        .addHeader("Accept","application/json")// Default XML was coming
+                        .addHeader("Accept","application/json")// by default XML was coming, so asking for JSON
                         .method(original.method(), original.body())
 
                 val request = requestBuilder.build()

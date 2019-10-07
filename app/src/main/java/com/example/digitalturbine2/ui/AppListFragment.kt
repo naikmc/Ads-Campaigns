@@ -51,7 +51,7 @@ class AppListFragment : Fragment(), CampaignListener {
         }
 
         viewModel.getCampaignListLiveData().observe(viewLifecycleOwner, Observer {
-            if(it != null) {
+            if(it != null && it.isNotEmpty()) {
                 error_layout.visibility = View.GONE
                 recycler_view.visibility = View.VISIBLE
                 myAdapter.setCampaignList(it)
